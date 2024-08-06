@@ -663,6 +663,7 @@ export class Formatter {
             for (const [index, detail] of details.entries()) {
               const testResult = detail as ActionTestMetadata
               if (!testResult.testStatus) {
+                testDetailTable.push('<br>MSZ 666 testStatus skip<br>')
                 continue
               }
 
