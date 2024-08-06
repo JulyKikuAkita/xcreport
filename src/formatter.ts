@@ -236,7 +236,7 @@ export class Formatter {
       chapterSummary.content.push('<tr>')
       const header = [
         `<th>Total`,
-        `<th>${passedIcon}&nbsp;Passed`,
+        `<th>${passedIcon}&nbsp;Passed FRED FRED FRED`,
         `<th>${failedIcon}&nbsp;Failed`,
         `<th>${skippedIcon}&nbsp;Skipped`,
         `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
@@ -840,9 +840,9 @@ export class Formatter {
               let testResultRow = ''
               if (details.length > 1) {
                 if (index - skippedPassedTests === 0) {
-                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent} FRED 843`
+                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 843`
                 } else {
-                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent} FRED 845`
+                  testResultRow = `<tr><td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 845`
                 }
               } else {
                 testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`

@@ -42,7 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.exportAttachments = void 0;
+exports.exportAttachments = exportAttachments;
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2037));
@@ -90,7 +90,6 @@ function exportAttachments(parser, activity) {
         }
     });
 }
-exports.exportAttachments = exportAttachments;
 
 
 /***/ }),
@@ -351,9 +350,9 @@ class Formatter {
         this.bundlePath = bundlePath;
         this.parser = new parser_1.Parser(this.bundlePath);
     }
-    format(options = new FormatterOptions()) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
+    format() {
+        return __awaiter(this, arguments, void 0, function* (options = new FormatterOptions()) {
+            var _a;
             const actionsInvocationRecord = yield this.parser.parse();
             const testReport = new report_1.TestReport();
             if (actionsInvocationRecord.metadataRef) {
@@ -476,12 +475,12 @@ class Formatter {
                     const groups = testSummary.groups;
                     groups[identifier] = group;
                 }
-                chapterSummary.content.push('### Summary');
+                chapterSummary.content.push('### Summary FRED');
                 chapterSummary.content.push('<table>');
                 chapterSummary.content.push('<tr>');
                 const header = [
                     `<th>Total`,
-                    `<th>${passedIcon}&nbsp;Passed`,
+                    `<th>${passedIcon}&nbsp;Passed FRED FRED FRED`,
                     `<th>${failedIcon}&nbsp;Failed`,
                     `<th>${skippedIcon}&nbsp;Skipped`,
                     `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
@@ -942,10 +941,10 @@ class Formatter {
                                 let testResultRow = '';
                                 if (details.length > 1) {
                                     if (index - skippedPassedTests === 0) {
-                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`;
+                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent} FRED 843`;
                                     }
                                     else {
-                                        testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`;
+                                        testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent} FRED 845`;
                                     }
                                 }
                                 else {
@@ -994,8 +993,8 @@ class Formatter {
             }
         });
     }
-    collectActivities(activitySummaries, activities, indent = 0) {
-        return __awaiter(this, void 0, void 0, function* () {
+    collectActivities(activitySummaries_1, activities_1) {
+        return __awaiter(this, arguments, void 0, function* (activitySummaries, activities, indent = 0) {
             for (const activitySummary of activitySummaries) {
                 const activity = activitySummary;
                 activity.indent = indent;
@@ -1094,7 +1093,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.icon = exports.testStatus = void 0;
+exports.testStatus = testStatus;
+exports.icon = icon;
 const path = __importStar(__nccwpck_require__(1017));
 const baseUrl = 'https://xcresulttool-static.netlify.app/i/';
 const attrs = 'width="14px" align="top"';
@@ -1125,12 +1125,10 @@ function testStatus(statusText) {
     }
     return `<img src="${baseUrl}${filename}" alt="${statusText}" title="${statusText}" ${attrs}>`;
 }
-exports.testStatus = testStatus;
 function icon(filename) {
     const alt = path.parse(filename).name;
     return `<img src="${baseUrl}${filename}" alt="${alt}" ${attrs}>`;
 }
-exports.icon = icon;
 
 
 /***/ }),
@@ -1187,6 +1185,7 @@ const { stat } = fs_1.promises;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            core.warning('MSZ: Testing the top of the run');
             const inputPaths = core.getMultilineInput('path');
             const showPassedTests = core.getBooleanInput('show-passed-tests');
             const showCodeCoverage = core.getBooleanInput('show-code-coverage');
@@ -1327,24 +1326,23 @@ function mergeResultBundle(inputPaths, outputPath) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.indentation = exports.escapeHashSign = exports.anchorNameTag = exports.anchorIdentifier = void 0;
+exports.anchorIdentifier = anchorIdentifier;
+exports.anchorNameTag = anchorNameTag;
+exports.escapeHashSign = escapeHashSign;
+exports.indentation = indentation;
 function anchorIdentifier(text) {
     return `#user-content-${text.toLowerCase()}`.replace(/ /g, '-');
 }
-exports.anchorIdentifier = anchorIdentifier;
 function anchorNameTag(text) {
     const name = text.toLowerCase().replace(/ /g, '-');
     return `<a name="${name}"/>`;
 }
-exports.anchorNameTag = anchorNameTag;
 function escapeHashSign(text) {
     return text.replace(/#/g, '<span>#</span>');
 }
-exports.escapeHashSign = escapeHashSign;
 function indentation(level) {
     return '  '.repeat(level);
 }
-exports.indentation = indentation;
 
 
 /***/ }),
@@ -4698,7 +4696,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
