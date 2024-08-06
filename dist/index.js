@@ -937,14 +937,14 @@ class Formatter {
                                         resultLines.push(`${testMethod}`);
                                     }
                                 }
-                                const testResultContent = resultLines.join('<br>');
+                                const testResultContent = resultLines.join('<br>MSZ 839<br>');
                                 let testResultRow = '';
                                 if (details.length > 1) {
                                     if (index - skippedPassedTests === 0) {
-                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent} FRED 843`;
+                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 843`;
                                     }
                                     else {
-                                        testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent} FRED 845`;
+                                        testResultRow = `<tr><td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 845`;
                                     }
                                 }
                                 else {
@@ -1185,7 +1185,6 @@ const { stat } = fs_1.promises;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            core.warning('MSZ: Testing the top of the run');
             const inputPaths = core.getMultilineInput('path');
             const showPassedTests = core.getBooleanInput('show-passed-tests');
             const showCodeCoverage = core.getBooleanInput('show-code-coverage');

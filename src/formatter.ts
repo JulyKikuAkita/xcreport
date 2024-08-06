@@ -836,7 +836,7 @@ export class Formatter {
                 }
               }
 
-              const testResultContent = resultLines.join('<br>')
+              const testResultContent = resultLines.join('<br>MSZ 839<br>')
               let testResultRow = ''
               if (details.length > 1) {
                 if (index - skippedPassedTests === 0) {
