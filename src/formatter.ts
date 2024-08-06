@@ -230,7 +230,7 @@ export class Formatter {
         groups[identifier] = group
       }
 
-      chapterSummary.content.push('### Summary')
+      chapterSummary.content.push('### Summary FRED')
 
       chapterSummary.content.push('<table>')
       chapterSummary.content.push('<tr>')
@@ -840,9 +840,9 @@ export class Formatter {
               let testResultRow = ''
               if (details.length > 1) {
                 if (index - skippedPassedTests === 0) {
-                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`
+                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent} FRED 843`
                 } else {
-                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`
+                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent} FRED 845`
                 }
               } else {
                 testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`
