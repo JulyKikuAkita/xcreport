@@ -121,7 +121,7 @@ export class Formatter {
                   testableSummary.tests,
                   testSummaries
                 )
-                if (testableSummary.name) {
+                if (testableSummary.name && options.showPassedTests) {
                   testReportChapter.sections[testableSummary.name] =
                     new TestReportSection(testableSummary, testSummaries)
                 }
@@ -230,13 +230,13 @@ export class Formatter {
         groups[identifier] = group
       }
 
-      chapterSummary.content.push('### Summary FRED')
+      chapterSummary.content.push('### Summary Layer1')
 
       chapterSummary.content.push('<table>')
       chapterSummary.content.push('<tr>')
       const header = [
         `<th>Total`,
-        `<th>${passedIcon}&nbsp;Passed FRED FRED FRED`,
+        `<th>${passedIcon}&nbsp;Passed`,
         `<th>${failedIcon}&nbsp;Failed`,
         `<th>${skippedIcon}&nbsp;Skipped`,
         `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
@@ -272,7 +272,8 @@ export class Formatter {
         testReport.testStatus = 'success'
       }
 
-      chapterSummary.content.push('### Test Summary')
+      chapterSummary.content.push('### Test Summary Layer2\n')
+      chapterSummary.content.push('<details>\n')
 
       for (const [groupIdentifier, group] of Object.entries(
         testSummary.groups
@@ -291,6 +292,7 @@ export class Formatter {
           `- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`
         )
 
+        chapterSummary.content.push('\n<details>\n')
         chapterSummary.content.push('<table>')
         chapterSummary.content.push('<tr>')
         const header = [
@@ -332,8 +334,9 @@ export class Formatter {
         }
         chapterSummary.content.push('')
         chapterSummary.content.push('</table>\n')
+        chapterSummary.content.push('</details>\n')
       }
-
+      chapterSummary.content.push('</details>\n')
       chapterSummary.content.push('---\n')
 
       const testFailures = new TestFailures()
@@ -573,37 +576,39 @@ export class Formatter {
           )
 
           const testsStatsLines: string[] = []
+          if (options.showPassedTests) {
+            testsStatsLines.push('<details>')
+            testsStatsLines.push('<table>')
+            testsStatsLines.push('<tr>')
+            const header = [
+              `<th>${passedIcon}`,
+              `<th>${failedIcon}`,
+              `<th>${skippedIcon}`,
+              `<th>${expectedFailureIcon}`,
+              `<th>:stopwatch:`
+            ].join('')
+            testsStatsLines.push(header)
 
-          testsStatsLines.push('<table>')
-          testsStatsLines.push('<tr>')
-          const header = [
-            `<th>${passedIcon}`,
-            `<th>${failedIcon}`,
-            `<th>${skippedIcon}`,
-            `<th>${expectedFailureIcon}`,
-            `<th>:stopwatch:`
-          ].join('')
-          testsStatsLines.push(header)
+            testsStatsLines.push('<tr>')
+            let failedCount: string
+            if (failed > 0) {
+              failedCount = `<b>${failed} (${failedRate}%)</b>`
+            } else {
+              failedCount = `${failed} (${failedRate}%)`
+            }
+            const cols = [
+              `<td align="right" width="154px">${passed} (${passedRate}%)`,
+              `<td align="right" width="154px">${failedCount}`,
+              `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
+              `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
+              `<td align="right" width="154px">${testDuration}s`
+            ].join('')
+            testsStatsLines.push(cols)
+            testsStatsLines.push('</table>\n')
+            testsStatsLines.push('</details>\n')
 
-          testsStatsLines.push('<tr>')
-          let failedCount: string
-          if (failed > 0) {
-            failedCount = `<b>${failed} (${failedRate}%)</b>`
-          } else {
-            failedCount = `${failed} (${failedRate}%)`
+            testDetail.lines.push(testsStatsLines.join('\n'))
           }
-          const cols = [
-            `<td align="right" width="154px">${passed} (${passedRate}%)`,
-            `<td align="right" width="154px">${failedCount}`,
-            `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
-            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
-            `<td align="right" width="154px">${testDuration}s`
-          ].join('')
-          testsStatsLines.push(cols)
-          testsStatsLines.push('</table>\n')
-
-          testDetail.lines.push(testsStatsLines.join('\n'))
-
           const testDetailTable: string[] = []
           testDetailTable.push(`<table>`)
 
@@ -867,9 +872,11 @@ export class Formatter {
       chapter.details.push(chapterDetail)
 
       chapterDetail.content.push(testDetails.header)
-      for (const testDetail of testDetails.details) {
-        for (const detail of testDetail.lines) {
-          chapterDetail.content.push(detail)
+      if (options.showPassedTests) {
+        for (const testDetail of testDetails.details) {
+          for (const detail of testDetail.lines) {
+            chapterDetail.content.push(detail)
+          }
         }
       }
     }
