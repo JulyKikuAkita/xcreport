@@ -26,6 +26,7 @@ test('Example.xcresult', async () => {
   const bundlePath = '__tests__/data/Example.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format({
+    showTestsSummary: true,
     showPassedTests: false,
     showCodeCoverage: true
   })
@@ -57,6 +58,7 @@ test('KeychainAccess.xcresult', async () => {
   const bundlePath = '__tests__/data/KeychainAccess.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format({
+    showTestsSummary: true,
     showPassedTests: false,
     showCodeCoverage: true
   })
@@ -194,6 +196,7 @@ test('Coverage.xcresult', async () => {
   const bundlePath = '__tests__/data/Coverage.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format({
+    showTestsSummary: true,
     showPassedTests: true,
     showCodeCoverage: false
   })
@@ -298,6 +301,7 @@ test('TestResults#669.xcresult', async () => {
 
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
+  process.env['INPUT_SHOW-TESTS-SUMMARY'] = 'true'
   process.env['INPUT_SHOW-PASSED-TESTS'] = 'true'
   process.env['INPUT_SHOW-CODE-COVERAGE'] = 'true'
   process.env['INPUT_UPLOAD-BUNDLES'] = 'true'

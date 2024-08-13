@@ -13,6 +13,7 @@ const {stat} = promises
 async function run(): Promise<void> {
   try {
     const inputPaths = core.getMultilineInput('path')
+    const showTestsSummary = core.getBooleanInput('show-tests-summary')
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
     let uploadBundles = core.getInput('upload-bundles').toLowerCase()
@@ -42,6 +43,7 @@ async function run(): Promise<void> {
 
     const formatter = new Formatter(bundlePath)
     const report = await formatter.format({
+      showTestsSummary,
       showPassedTests,
       showCodeCoverage
     })

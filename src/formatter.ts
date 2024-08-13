@@ -230,7 +230,7 @@ export class Formatter {
         groups[identifier] = group
       }
 
-      chapterSummary.content.push('### Summary Layer1')
+      chapterSummary.content.push('### Summary')
 
       chapterSummary.content.push('<table>')
       chapterSummary.content.push('<tr>')
@@ -272,7 +272,7 @@ export class Formatter {
         testReport.testStatus = 'success'
       }
 
-      chapterSummary.content.push('### Test Summary Layer2\n')
+      chapterSummary.content.push('### Test Summary\n')
       chapterSummary.content.push('<details>\n')
 
       for (const [groupIdentifier, group] of Object.entries(
@@ -292,7 +292,6 @@ export class Formatter {
           `- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`
         )
 
-        chapterSummary.content.push('\n<details>\n')
         chapterSummary.content.push('<table>')
         chapterSummary.content.push('<tr>')
         const header = [
@@ -334,7 +333,6 @@ export class Formatter {
         }
         chapterSummary.content.push('')
         chapterSummary.content.push('</table>\n')
-        chapterSummary.content.push('</details>\n')
       }
       chapterSummary.content.push('</details>\n')
       chapterSummary.content.push('---\n')
@@ -576,8 +574,7 @@ export class Formatter {
           )
 
           const testsStatsLines: string[] = []
-          if (options.showPassedTests) {
-            testsStatsLines.push('<details>')
+          if (options.showTestsSummary) {
             testsStatsLines.push('<table>')
             testsStatsLines.push('<tr>')
             const header = [
@@ -605,7 +602,6 @@ export class Formatter {
             ].join('')
             testsStatsLines.push(cols)
             testsStatsLines.push('</table>\n')
-            testsStatsLines.push('</details>\n')
 
             testDetail.lines.push(testsStatsLines.join('\n'))
           }
@@ -990,10 +986,16 @@ interface FailureSummary {
 }
 
 export class FormatterOptions {
+  showTestsSummary: boolean
   showPassedTests: boolean
   showCodeCoverage: boolean
 
-  constructor(showPassedTests = true, showCodeCoverage = true) {
+  constructor(
+    showPassedTests = true,
+    showCodeCoverage = true,
+    showTestsSummary = true
+  ) {
+    this.showTestsSummary = showTestsSummary
     this.showPassedTests = showPassedTests
     this.showCodeCoverage = showCodeCoverage
   }

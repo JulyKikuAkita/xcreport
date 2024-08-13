@@ -79,3 +79,8 @@ jobs:
             __tests__/data/KeychainAccess.xcresult
             __tests__/data/TAU.xcresult
           title: 'Multiple Paths'
+      # - uses: ./
+      #   with:
+      #     path: __tests__/data/Real.xcresult
+      #     title: Testing project SXM with scheme Build and Test All for CI
+      #     show-tests-summary: false
