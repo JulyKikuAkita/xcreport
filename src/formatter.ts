@@ -121,7 +121,7 @@ export class Formatter {
                   testableSummary.tests,
                   testSummaries
                 )
-                if (testableSummary.name && options.showPassedTests) {
+                if (testableSummary.name) {
                   testReportChapter.sections[testableSummary.name] =
                     new TestReportSection(testableSummary, testSummaries)
                 }
@@ -272,28 +272,29 @@ export class Formatter {
         testReport.testStatus = 'success'
       }
 
-      chapterSummary.content.push('### Test Summary\n')
-      chapterSummary.content.push('<details>\n')
+      let testSummaryPlaceHolder: string[] = []
+      testSummaryPlaceHolder.push('### Test Summary\n')
+      testSummaryPlaceHolder.push('<details>\n')
 
       for (const [groupIdentifier, group] of Object.entries(
         testSummary.groups
       )) {
         const anchorName = anchorIdentifier(groupIdentifier)
         const anchorTag = anchorNameTag(`${groupIdentifier}_summary`)
-        chapterSummary.content.push(
+        testSummaryPlaceHolder.push(
           `#### ${anchorTag}[${groupIdentifier}](${anchorName})\n`
         )
 
         const runDestination = chapter.runDestination
-        chapterSummary.content.push(
+        testSummaryPlaceHolder.push(
           `- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`
         )
-        chapterSummary.content.push(
+        testSummaryPlaceHolder.push(
           `- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`
         )
 
-        chapterSummary.content.push('<table>')
-        chapterSummary.content.push('<tr>')
+        testSummaryPlaceHolder.push('<table>')
+        testSummaryPlaceHolder.push('<tr>')
         const header = [
           `<th>Test`,
           `<th>Total`,
@@ -302,10 +303,10 @@ export class Formatter {
           `<th>${skippedIcon}`,
           `<th>${expectedFailureIcon}`
         ].join('')
-        chapterSummary.content.push(header)
+        testSummaryPlaceHolder.push(header)
 
         for (const [identifier, stats] of Object.entries(group)) {
-          chapterSummary.content.push('<tr>')
+          testSummaryPlaceHolder.push('<tr>')
           const testClass = `${testClassIcon}&nbsp;${identifier}`
           const testClassAnchor = anchorNameTag(
             `${groupIdentifier}_${identifier}_summary`
@@ -329,13 +330,17 @@ export class Formatter {
             `<td align="right" width="80px">${stats.skipped}`,
             `<td align="right" width="80px">${stats.expectedFailure}`
           ].join('')
-          chapterSummary.content.push(cols)
+          testSummaryPlaceHolder.push(cols)
         }
-        chapterSummary.content.push('')
-        chapterSummary.content.push('</table>\n')
+        testSummaryPlaceHolder.push('')
+        testSummaryPlaceHolder.push('</table>\n')
       }
-      chapterSummary.content.push('</details>\n')
-      chapterSummary.content.push('---\n')
+      testSummaryPlaceHolder.push('</details>\n')
+      testSummaryPlaceHolder.push('---\n')
+
+      if (options.showTestsSummary) {
+        chapterSummary.content.push(...testSummaryPlaceHolder)
+      }
 
       const testFailures = new TestFailures()
       const annotations: Annotation[] = []
@@ -574,37 +579,35 @@ export class Formatter {
           )
 
           const testsStatsLines: string[] = []
-          if (options.showTestsSummary) {
-            testsStatsLines.push('<table>')
-            testsStatsLines.push('<tr>')
-            const header = [
-              `<th>${passedIcon}`,
-              `<th>${failedIcon}`,
-              `<th>${skippedIcon}`,
-              `<th>${expectedFailureIcon}`,
-              `<th>:stopwatch:`
-            ].join('')
-            testsStatsLines.push(header)
+          testsStatsLines.push('<table>')
+          testsStatsLines.push('<tr>')
+          const header = [
+            `<th>${passedIcon}`,
+            `<th>${failedIcon}`,
+            `<th>${skippedIcon}`,
+            `<th>${expectedFailureIcon}`,
+            `<th>:stopwatch:`
+          ].join('')
+          testsStatsLines.push(header)
 
-            testsStatsLines.push('<tr>')
-            let failedCount: string
-            if (failed > 0) {
-              failedCount = `<b>${failed} (${failedRate}%)</b>`
-            } else {
-              failedCount = `${failed} (${failedRate}%)`
-            }
-            const cols = [
-              `<td align="right" width="154px">${passed} (${passedRate}%)`,
-              `<td align="right" width="154px">${failedCount}`,
-              `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
-              `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
-              `<td align="right" width="154px">${testDuration}s`
-            ].join('')
-            testsStatsLines.push(cols)
-            testsStatsLines.push('</table>\n')
-
-            testDetail.lines.push(testsStatsLines.join('\n'))
+          testsStatsLines.push('<tr>')
+          let failedCount: string
+          if (failed > 0) {
+            failedCount = `<b>${failed} (${failedRate}%)</b>`
+          } else {
+            failedCount = `${failed} (${failedRate}%)`
           }
+          const cols = [
+            `<td align="right" width="154px">${passed} (${passedRate}%)`,
+            `<td align="right" width="154px">${failedCount}`,
+            `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
+            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
+            `<td align="right" width="154px">${testDuration}s`
+          ].join('')
+          testsStatsLines.push(cols)
+          testsStatsLines.push('</table>\n')
+
+          testDetail.lines.push(testsStatsLines.join('\n'))
           const testDetailTable: string[] = []
           testDetailTable.push(`<table>`)
 
@@ -868,11 +871,9 @@ export class Formatter {
       chapter.details.push(chapterDetail)
 
       chapterDetail.content.push(testDetails.header)
-      if (options.showPassedTests) {
-        for (const testDetail of testDetails.details) {
-          for (const detail of testDetail.lines) {
-            chapterDetail.content.push(detail)
-          }
+      for (const testDetail of testDetails.details) {
+        for (const detail of testDetail.lines) {
+          chapterDetail.content.push(detail)
         }
       }
     }
