@@ -667,7 +667,7 @@ export class Formatter {
             for (const [index, detail] of details.entries()) {
               const testResult = detail as ActionTestMetadata
               if (!testResult.testStatus) {
-                testDetailTable.push('<br>MSZ 666 testStatus skip<br>')
+                testDetailTable.push('')
                 continue
               }
 
@@ -841,13 +841,13 @@ export class Formatter {
                 }
               }
 
-              const testResultContent = resultLines.join('<br>MSZ 839<br>')
+              const testResultContent = resultLines.join('<br>')
               let testResultRow = ''
               if (details.length > 1) {
                 if (index - skippedPassedTests === 0) {
-                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 843`
+                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`
                 } else {
-                  testResultRow = `<tr><td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 845`
+                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`
                 }
               } else {
                 testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`

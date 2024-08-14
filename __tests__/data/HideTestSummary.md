@@ -10,40 +10,6 @@
 
 ---
 
-### Test Summary
-
-<details>
-
-#### <a name="weathertests_summary"/>[WeatherTests](#user-content-weathertests)
-
-- **Device:** iPhone 13 mini, 15.0 (19A339)
-- **SDK:** Simulator - iOS 15.0, 15.0
-<table>
-<tr>
-<th>Test<th>Total<th><img src="https://xcresulttool-static.netlify.app/i/passed.png" alt="Success" title="Success" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/failure.png" alt="Failure" title="Failure" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top">
-<tr>
-<td align="left" width="368px"><a name="weathertests_weathertests_summary"/><a href="#user-content-weathertests_weathertests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;WeatherTests</a><td align="right" width="80px">3<td align="right" width="80px">2<td align="right" width="80px"><b>1</b><td align="right" width="80px">0<td align="right" width="80px">0
-
-</table>
-
-#### <a name="weatheruitests_summary"/>[WeatherUITests](#user-content-weatheruitests)
-
-- **Device:** iPhone 13 mini, 15.0 (19A339)
-- **SDK:** Simulator - iOS 15.0, 15.0
-<table>
-<tr>
-<th>Test<th>Total<th><img src="https://xcresulttool-static.netlify.app/i/passed.png" alt="Success" title="Success" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/failure.png" alt="Failure" title="Failure" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top">
-<tr>
-<td align="left" width="368px"><a name="weatheruitests_weatheruitests4_summary"/><a href="#user-content-weatheruitests_weatheruitests4"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;WeatherUITests4</a><td align="right" width="80px">4<td align="right" width="80px">3<td align="right" width="80px">0<td align="right" width="80px">0<td align="right" width="80px">1
-<tr>
-<td align="left" width="368px"><a name="weatheruitests_weatheruitestslaunchtests_summary"/><a href="#user-content-weatheruitests_weatheruitestslaunchtests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;WeatherUITestsLaunchTests</a><td align="right" width="80px">4<td align="right" width="80px">3<td align="right" width="80px"><b>1</b><td align="right" width="80px">0<td align="right" width="80px">0
-
-</table>
-
-</details>
-
----
-
 ### <img src="https://xcresulttool-static.netlify.app/i/failure.png" alt="Failure" title="Failure" width="14px" align="top"> Failures
 <h4><a name="weathertests_weathertests/testfail()_failure-summary"/><a href="#user-content-weathertests_weathertests/testfail()">WeatherTests/WeatherTests/testFail()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b><td width="668px">/Users/katsumi/Develop/Weather/WeatherTests/WeatherTests.swift:23<tr><td align="right" width="100px"><b>Issue Type</b><td width="668px">Assertion Failure<tr><td align="right" width="100px"><b>Message</b><td width="668px">XCTAssertEqual failed: ("1") is not equal to ("2")</table>

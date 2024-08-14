@@ -9,7 +9,7 @@ const {readFile, writeFile} = promises
 import {Formatter, FormatterOptions} from '../src/formatter'
 
 test('Example.xcresult', async () => {
-  const bundlePath = '__tests__/data/Example.xcresult'
+  const bundlePath = '__tests__/data/example.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format()
   const reportText = `${report.reportSummary}\n${report.reportDetail}`
@@ -310,5 +310,23 @@ test('test runs', () => {
   const options: cp.ExecFileSyncOptions = {
     env: process.env
   }
-  console.log(cp.execFileSync(np, [ip], options).toString())
+  // console.log(cp.execFileSync(np, [ip], options).toString())
+})
+
+test('Hide TestSummary Section', async () => {
+  const bundlePath = '__tests__/data/Example.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format({
+    showTestsSummary: false,
+    showPassedTests: false,
+    showCodeCoverage: false
+  })
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'ExampleOnlyFailures.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('HideTestSummary.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/HideTestSummary.md')).toString()
+  )
 })

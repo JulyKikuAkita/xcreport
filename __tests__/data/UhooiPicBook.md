@@ -11,6 +11,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="uhooipicbooktests_summary"/>[UhooiPicBookTests](#user-content-uhooipicbooktests)
 
 - **Device:** iPhone 13 Pro Max, 15.0 (19A339)
@@ -30,6 +33,8 @@
 <td align="left" width="368px"><a name="uhooipicbooktests_monsterdetailpresentertests_summary"/><a href="#user-content-uhooipicbooktests_monsterdetailpresentertests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;MonsterDetailPresenterTests</a><td align="right" width="80px">5<td align="right" width="80px">5<td align="right" width="80px">0<td align="right" width="80px">0<td align="right" width="80px">0
 
 </table>
+
+</details>
 
 ---
 
