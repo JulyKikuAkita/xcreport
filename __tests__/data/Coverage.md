@@ -11,6 +11,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="xcresulttool-exampletests_summary"/>[xcresulttool-exampleTests](#user-content-xcresulttool-exampletests)
 
 - **Device:** iPhone 13, 15.0 (19A339)
@@ -36,6 +39,8 @@
 <td align="left" width="368px"><a name="xcresulttool-exampleuitests_xcresulttool_exampleuitestslaunchtests_summary"/><a href="#user-content-xcresulttool-exampleuitests_xcresulttool_exampleuitestslaunchtests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;xcresulttool_exampleUITestsLaunchTests</a><td align="right" width="80px">4<td align="right" width="80px">4<td align="right" width="80px">0<td align="right" width="80px">0<td align="right" width="80px">0
 
 </table>
+
+</details>
 
 ---
 

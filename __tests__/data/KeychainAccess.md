@@ -11,6 +11,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="keychainaccesstests_summary"/>[KeychainAccessTests](#user-content-keychainaccesstests)
 
 - **Device:** iPhone 13 mini, 15.0 (19A339)
@@ -44,6 +47,8 @@
 <td align="left" width="368px"><a name="keychainaccesstests-maccatalyst_keychainaccesstests_summary"/><a href="#user-content-keychainaccesstests-maccatalyst_keychainaccesstests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;KeychainAccessTests</a><td align="right" width="80px">34<td align="right" width="80px">30<td align="right" width="80px"><b>4</b><td align="right" width="80px">0<td align="right" width="80px">0
 
 </table>
+
+</details>
 
 ---
 

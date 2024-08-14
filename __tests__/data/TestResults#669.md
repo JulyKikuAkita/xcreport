@@ -11,6 +11,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="analyticsmanagerunittests_summary"/>[AnalyticsManagerUnitTests](#user-content-analyticsmanagerunittests)
 
 - **Device:** iPhone 14, 16.2 (20C52)
@@ -182,6 +185,8 @@
 <th>Test<th>Total<th><img src="https://xcresulttool-static.netlify.app/i/passed.png" alt="Success" title="Success" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/failure.png" alt="Failure" title="Failure" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"><th><img src="https://xcresulttool-static.netlify.app/i/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top">
 
 </table>
+
+</details>
 
 ---
 

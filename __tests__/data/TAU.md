@@ -11,6 +11,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="tauuitests_summary"/>[TAUUITests](#user-content-tauuitests)
 
 - **Device:** iPhone 13 mini, 15.0 (19A339)
@@ -24,6 +27,8 @@
 <td align="left" width="368px"><a name="tauuitests_tauuitests_summary"/><a href="#user-content-tauuitests_tauuitests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;TAUUITests</a><td align="right" width="80px">2<td align="right" width="80px">1<td align="right" width="80px"><b>1</b><td align="right" width="80px">0<td align="right" width="80px">0
 
 </table>
+
+</details>
 
 ---
 

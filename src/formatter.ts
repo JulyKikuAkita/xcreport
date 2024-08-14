@@ -230,13 +230,13 @@ export class Formatter {
         groups[identifier] = group
       }
 
-      chapterSummary.content.push('### Summary FRED')
+      chapterSummary.content.push('### Summary')
 
       chapterSummary.content.push('<table>')
       chapterSummary.content.push('<tr>')
       const header = [
         `<th>Total`,
-        `<th>${passedIcon}&nbsp;Passed FRED FRED FRED`,
+        `<th>${passedIcon}&nbsp;Passed`,
         `<th>${failedIcon}&nbsp;Failed`,
         `<th>${skippedIcon}&nbsp;Skipped`,
         `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
@@ -272,27 +272,29 @@ export class Formatter {
         testReport.testStatus = 'success'
       }
 
-      chapterSummary.content.push('### Test Summary')
+      let testSummaryPlaceHolder: string[] = []
+      testSummaryPlaceHolder.push('### Test Summary\n')
+      testSummaryPlaceHolder.push('<details>\n')
 
       for (const [groupIdentifier, group] of Object.entries(
         testSummary.groups
       )) {
         const anchorName = anchorIdentifier(groupIdentifier)
         const anchorTag = anchorNameTag(`${groupIdentifier}_summary`)
-        chapterSummary.content.push(
+        testSummaryPlaceHolder.push(
           `#### ${anchorTag}[${groupIdentifier}](${anchorName})\n`
         )
 
         const runDestination = chapter.runDestination
-        chapterSummary.content.push(
+        testSummaryPlaceHolder.push(
           `- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`
         )
-        chapterSummary.content.push(
+        testSummaryPlaceHolder.push(
           `- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`
         )
 
-        chapterSummary.content.push('<table>')
-        chapterSummary.content.push('<tr>')
+        testSummaryPlaceHolder.push('<table>')
+        testSummaryPlaceHolder.push('<tr>')
         const header = [
           `<th>Test`,
           `<th>Total`,
@@ -301,10 +303,10 @@ export class Formatter {
           `<th>${skippedIcon}`,
           `<th>${expectedFailureIcon}`
         ].join('')
-        chapterSummary.content.push(header)
+        testSummaryPlaceHolder.push(header)
 
         for (const [identifier, stats] of Object.entries(group)) {
-          chapterSummary.content.push('<tr>')
+          testSummaryPlaceHolder.push('<tr>')
           const testClass = `${testClassIcon}&nbsp;${identifier}`
           const testClassAnchor = anchorNameTag(
             `${groupIdentifier}_${identifier}_summary`
@@ -328,13 +330,17 @@ export class Formatter {
             `<td align="right" width="80px">${stats.skipped}`,
             `<td align="right" width="80px">${stats.expectedFailure}`
           ].join('')
-          chapterSummary.content.push(cols)
+          testSummaryPlaceHolder.push(cols)
         }
-        chapterSummary.content.push('')
-        chapterSummary.content.push('</table>\n')
+        testSummaryPlaceHolder.push('')
+        testSummaryPlaceHolder.push('</table>\n')
       }
+      testSummaryPlaceHolder.push('</details>\n')
+      testSummaryPlaceHolder.push('---\n')
 
-      chapterSummary.content.push('---\n')
+      if (options.showTestsSummary) {
+        chapterSummary.content.push(...testSummaryPlaceHolder)
+      }
 
       const testFailures = new TestFailures()
       const annotations: Annotation[] = []
@@ -573,7 +579,6 @@ export class Formatter {
           )
 
           const testsStatsLines: string[] = []
-
           testsStatsLines.push('<table>')
           testsStatsLines.push('<tr>')
           const header = [
@@ -603,7 +608,6 @@ export class Formatter {
           testsStatsLines.push('</table>\n')
 
           testDetail.lines.push(testsStatsLines.join('\n'))
-
           const testDetailTable: string[] = []
           testDetailTable.push(`<table>`)
 
@@ -663,7 +667,7 @@ export class Formatter {
             for (const [index, detail] of details.entries()) {
               const testResult = detail as ActionTestMetadata
               if (!testResult.testStatus) {
-                testDetailTable.push('<br>MSZ 666 testStatus skip<br>')
+                testDetailTable.push('')
                 continue
               }
 
@@ -837,13 +841,13 @@ export class Formatter {
                 }
               }
 
-              const testResultContent = resultLines.join('<br>MSZ 839<br>')
+              const testResultContent = resultLines.join('<br>')
               let testResultRow = ''
               if (details.length > 1) {
                 if (index - skippedPassedTests === 0) {
-                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 843`
+                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`
                 } else {
-                  testResultRow = `<tr><td ${valign} ${detailWidth}>FRED ${testResultContent} FRED 845`
+                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`
                 }
               } else {
                 testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`
@@ -983,10 +987,16 @@ interface FailureSummary {
 }
 
 export class FormatterOptions {
+  showTestsSummary: boolean
   showPassedTests: boolean
   showCodeCoverage: boolean
 
-  constructor(showPassedTests = true, showCodeCoverage = true) {
+  constructor(
+    showPassedTests = true,
+    showCodeCoverage = true,
+    showTestsSummary = true
+  ) {
+    this.showTestsSummary = showTestsSummary
     this.showPassedTests = showPassedTests
     this.showCodeCoverage = showCodeCoverage
   }

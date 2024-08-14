@@ -11,6 +11,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="spaceshiptests_summary"/>[SpaceshipTests](#user-content-spaceshiptests)
 
 - **Device:** iPhone 13 Pro, 15.0 (19A339)
@@ -36,6 +39,8 @@
 <td align="left" width="368px"><a name="spaceshipuitests_spaceshipuitestslaunchtests_summary"/><a href="#user-content-spaceshipuitests_spaceshipuitestslaunchtests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;SpaceshipUITestsLaunchTests</a><td align="right" width="80px">4<td align="right" width="80px">4<td align="right" width="80px">0<td align="right" width="80px">0<td align="right" width="80px">0
 
 </table>
+
+</details>
 
 ---
 
@@ -57,6 +62,9 @@
 ---
 
 ### Test Summary
+
+<details>
+
 #### <a name="spaceshiptests_summary"/>[SpaceshipTests](#user-content-spaceshiptests)
 
 - **Device:** iPhone 13 mini, 15.0 (19A339)
@@ -82,6 +90,8 @@
 <td align="left" width="368px"><a name="spaceshipuitests_spaceshipuitestslaunchtests_summary"/><a href="#user-content-spaceshipuitests_spaceshipuitestslaunchtests"><img src="https://xcresulttool-static.netlify.app/i/test-class.png" alt="test-class" width="14px" align="top">&nbsp;SpaceshipUITestsLaunchTests</a><td align="right" width="80px">4<td align="right" width="80px">4<td align="right" width="80px">0<td align="right" width="80px">0<td align="right" width="80px">0
 
 </table>
+
+</details>
 
 ---
 
